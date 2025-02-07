@@ -1,0 +1,8 @@
+CREATE TABLE ab_test_tracking (
+    user_id STRING,
+    experiment_name STRING,
+    variant STRING,
+    timestamp TIMESTAMP,
+    primary_metric FLOAT,
+    secondary_metric FLOAT
+);
