@@ -1,0 +1,25 @@
+SELECT 
+    investor_id, 
+    product_type, 
+    notional_amount, 
+    implied_volatility, 
+    delta, gamma, theta, vega
+FROM structured_product_holdings;
+
+import numpy as np
+from scipy.stats import norm
+
+# Black-Scholes option pricing formula
+def black_scholes(S, K, T, r, sigma, option_type="call"):
+    d1 = (np.log(S/K) + (r + 0.5*sigma**2) * T) / (sigma * np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
+    
+    if option_type == "call":
+        return S * norm.cdf(d1) - K * np.exp(-r*T) * norm.cdf(d2)
+    else:
+        return K * np.exp(-r*T) * norm.cdf(-d2) - S * norm.cdf(d1)
+
+# Example: Pricing a structured product option
+price = black_scholes(S=100, K=105, T=1, r=0.02, sigma=0.25, option_type="call")
+print(f"Option Price: {price:.2f}")
+
