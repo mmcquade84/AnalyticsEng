@@ -1,0 +1,16 @@
+from scipy import stats
+
+# Fetch experiment data
+df = pd.read_sql("SELECT variant, primary_metric FROM ab_test_tracking", engine)
+
+# Perform t-test
+control = df[df["variant"] == "Control"]["primary_metric"]
+treatment = df[df["variant"] == "Treatment"]["primary_metric"]
+
+t_stat, p_value = stats.ttest_ind(control, treatment)
+
+# Interpretation
+if p_value < 0.05:
+    print("Significant difference detected! Feature has an impact.")
+else:
+    print("No significant difference found.")
