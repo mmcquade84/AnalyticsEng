@@ -1,0 +1,31 @@
+SELECT 
+    fund_id, 
+    fund_name, 
+    annual_return, 
+    benchmark_return, 
+    volatility, 
+    alpha_coefficient
+FROM hedge_fund_performance
+WHERE reporting_year = '2023';
+
+import pandas as pd
+import statsmodels.api as sm
+
+# Load hedge fund data
+df = pd.read_csv("hedge_fund_performance.csv")
+
+# Define factor exposures (market, momentum, size)
+X = df[["market_factor", "momentum_factor", "size_factor"]]
+X = sm.add_constant(X)  # Add intercept
+
+# Define dependent variable (fund return)
+y = df["fund_return"]
+
+# Perform regression analysis
+model = sm.OLS(y, X).fit()
+print(model.summary())
+
+SELECT fund_name, alpha_coefficient
+FROM hedge_fund_performance
+WHERE alpha_coefficient > 2.0
+ORDER BY alpha_coefficient DESC;
