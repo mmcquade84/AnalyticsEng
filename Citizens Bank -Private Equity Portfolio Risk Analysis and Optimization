@@ -46,3 +46,6 @@ plt.show()
 print(f"Probability of Loss: {loss_probability:.2%}")
 
 Helps optimize portfolio allocation by simulating different risk scenarios.
+Interactive Tableau Dashboard showing portfolio risk distribution.
+Custom Python ML model to predict fund risk based on historical data.
+Optimized portfolio recommendations based on Monte Carlo simulations.
