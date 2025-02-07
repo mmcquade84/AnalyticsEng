@@ -1,0 +1,5 @@
+SELECT 
+    fund_id,
+    SUM(asset_value) - SUM(liabilities) AS net_asset_value
+FROM fund_holdings
+GROUP BY fund_id;
