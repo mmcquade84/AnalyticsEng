@@ -1,3 +1,17 @@
+Business Problem
+Hedge funds invest in complex assets and use derivative trading strategies. Investors need detailed performance attribution to identify alpha-generating strategies.
+
+Solution
+Developed an Advanced Hedge Fund Performance Attribution System that:
+
+Decomposes hedge fund returns into market, style, and risk factors.
+Identifies high-alpha strategies that consistently outperform benchmarks.
+Recommends portfolio reallocation based on factor-based performance.
+Data Sources
+Hedge Fund NAV Reports: Net Asset Value of hedge funds.
+Factor Exposure Data: Market risk, momentum, size, liquidity factors.
+Investor Transactions: Historical investment data.
+
 SELECT 
     fund_id, 
     fund_name, 
@@ -7,6 +21,11 @@ SELECT
     alpha_coefficient
 FROM hedge_fund_performance
 WHERE reporting_year = '2023';
+
+Identifies hedge funds that outperform benchmarks.
+Calculates alpha to measure manager skill.
+
+Step 2: Statistical Regression for Performance Attribution
 
 import pandas as pd
 import statsmodels.api as sm
@@ -25,7 +44,17 @@ y = df["fund_return"]
 model = sm.OLS(y, X).fit()
 print(model.summary())
 
+Determines which factors drive hedge fund returns.
+
+Step 3: Identifying High-Alpha Hedge Funds
+
 SELECT fund_name, alpha_coefficient
 FROM hedge_fund_performance
 WHERE alpha_coefficient > 2.0
 ORDER BY alpha_coefficient DESC;
+
+Helps investors allocate capital to high-alpha funds.
+Python-based performance attribution model.
+SQL-based alpha ranking system.
+Tableau visualization of hedge fund factor exposures.
+
