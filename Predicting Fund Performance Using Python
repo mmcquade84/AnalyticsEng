@@ -1,0 +1,13 @@
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+# Load investment data
+df = pd.read_csv("fund_returns.csv")
+
+# Train model
+X = df[["past_1yr_return", "volatility", "fund_size"]]
+y = df["expected_annual_return"]
+model = LinearRegression().fit(X, y)
+
+# Predict future returns
+df["predicted_return"] = model.predict(X)
