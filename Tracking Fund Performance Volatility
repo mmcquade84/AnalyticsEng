@@ -1,0 +1,7 @@
+SELECT 
+    investment_id,
+    investment_product,
+    STDDEV(return_pct) AS return_volatility
+FROM investment_returns
+GROUP BY investment_id, investment_product
+ORDER BY return_volatility DESC;
