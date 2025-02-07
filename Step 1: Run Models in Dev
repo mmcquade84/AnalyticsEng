@@ -1,0 +1,3 @@
+dbt run --select stg_investor_activity
+dbt run --select int_investor_metrics
+dbt run --select fct_investment_performance
