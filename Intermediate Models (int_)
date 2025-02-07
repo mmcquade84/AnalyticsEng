@@ -1,0 +1,17 @@
+WITH investor_summary AS (
+    SELECT
+        investor_id,
+        COUNT(DISTINCT investment_id) AS total_investments,
+        SUM(investment_amount) AS total_investment_value,
+        SUM(redemption_amount) AS total_redemptions,
+        AVG(investment_amount) AS avg_investment_size
+    FROM {{ ref('stg_investor_activity') }}
+    GROUP BY investor_id
+)
+SELECT *,
+       CASE 
+           WHEN total_redemptions > 0.5 * total_investment_value THEN 'High Risk'
+           WHEN total_investments > 5 THEN 'Low Risk'
+           ELSE 'Medium Risk'
+       END AS investor_risk_label
+FROM investor_summary;
