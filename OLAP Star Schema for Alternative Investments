@@ -1,0 +1,19 @@
+CREATE TABLE fact_investments (
+    investment_id INT PRIMARY KEY,
+    investor_id INT,
+    fund_id INT,
+    amount DECIMAL(15,2),
+    date TIMESTAMP
+);
+
+CREATE TABLE dim_investors (
+    investor_id INT PRIMARY KEY,
+    investor_name VARCHAR(255),
+    risk_tolerance VARCHAR(50)
+);
+
+CREATE TABLE dim_funds (
+    fund_id INT PRIMARY KEY,
+    fund_name VARCHAR(255),
+    category VARCHAR(100)
+);
