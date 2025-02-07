@@ -1,0 +1,9 @@
+SELECT 
+    investor_id, 
+    total_investments, 
+    num_redemptions, 
+    exposure_to_hedge_funds, 
+    exposure_to_private_equity, 
+    structured_product_holdings, 
+    risk_flag 
+FROM investment_data;
