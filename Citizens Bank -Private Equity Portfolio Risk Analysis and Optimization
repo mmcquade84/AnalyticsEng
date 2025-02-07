@@ -1,3 +1,6 @@
+Step 1: Data Collection & Preprocessing
+SQL Query to Extract Private Equity Fund Data
+
 SELECT 
     investor_id, 
     fund_name, 
@@ -9,6 +12,9 @@ SELECT
 FROM private_equity_investments
 WHERE investment_date >= '2015-01-01';
 
+Step 2: Risk Calculation Using Python
+Python Code for Value at Risk (VaR) Analysis
+
 import numpy as np
 import pandas as pd
 
@@ -19,6 +25,7 @@ returns = pd.read_csv("private_equity_returns.csv")
 var_95 = np.percentile(returns["daily_return"], 5)
 print(f"95% Value at Risk: {var_95:.2f}%")
 
+Step 3: Portfolio Optimization Using Monte Carlo Simulation
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -38,3 +45,4 @@ plt.show()
 
 print(f"Probability of Loss: {loss_probability:.2%}")
 
+Helps optimize portfolio allocation by simulating different risk scenarios.
