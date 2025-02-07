@@ -1,0 +1,25 @@
+from prefect import flow, task
+from prefect_snowflake import SnowflakeQuery
+
+@task
+def ingest_data():
+    """Extract data using Airbyte"""
+    return "Airbyte sync successful"
+
+@task
+def transform_data():
+    """Run dbt transformations"""
+    return "dbt transformations completed"
+
+@task
+def update_dashboard():
+    """Refresh Tableau dashboard"""
+    return "Dashboard updated"
+
+@flow
+def etl_pipeline():
+    ingest_data()
+    transform_data()
+    update_dashboard()
+
+etl_pipeline()
