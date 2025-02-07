@@ -1,0 +1,17 @@
+WITH leads AS (
+    SELECT investor_id, lead_source, date_created 
+    FROM crm_leads
+),
+investments AS (
+    SELECT investor_id, investment_amount, investment_product, status 
+    FROM investment_transactions
+)
+SELECT 
+    l.investor_id, 
+    l.lead_source, 
+    i.investment_product, 
+    i.investment_amount, 
+    i.status 
+FROM leads l 
+LEFT JOIN investments i 
+ON l.investor_id = i.investor_id;
