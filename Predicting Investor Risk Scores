@@ -1,0 +1,13 @@
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+
+# Load investor data
+df = pd.read_csv("investor_data.csv")
+
+# Train model
+X = df[["investment_amount", "num_redemptions"]]
+y = df["risk_score"]
+model = RandomForestClassifier().fit(X, y)
+
+# Predict risk
+df["predicted_risk"] = model.predict(X)
