@@ -1,0 +1,18 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulate 1000 investment return paths
+np.random.seed(42)
+initial_value = 1000000  # $1M initial investment
+returns = np.random.normal(0.01, 0.05, (1000, 252))  # 252 trading days
+
+# Calculate portfolio growth paths
+portfolio_values = initial_value * np.exp(np.cumsum(returns, axis=1))
+
+# Plot simulation
+plt.figure(figsize=(10,5))
+plt.plot(portfolio_values.T, color="blue", alpha=0.1)
+plt.title("Monte Carlo Simulations of Alternative Investment Portfolio")
+plt.xlabel("Days")
+plt.ylabel("Portfolio Value ($)")
+plt.show()

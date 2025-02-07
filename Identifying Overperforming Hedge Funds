@@ -1,0 +1,14 @@
+WITH fund_performance AS (
+    SELECT 
+        fund_id,
+        fund_name,
+        AVG(annual_return) AS avg_annual_return,
+        AVG(market_return) AS avg_market_return
+    FROM hedge_fund_performance
+    GROUP BY fund_id, fund_name
+)
+SELECT *, 
+       avg_annual_return - avg_market_return AS alpha
+FROM fund_performance
+WHERE avg_annual_return > avg_market_return
+ORDER BY alpha DESC;

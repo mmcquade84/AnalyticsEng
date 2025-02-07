@@ -1,0 +1,16 @@
+import pandas as pd
+import statsmodels.api as sm
+
+# Load data
+df = pd.read_csv("fund_performance.csv")
+
+# Define independent variables (factors)
+X = df[["market_return", "size_factor", "illiquidity_factor"]]
+X = sm.add_constant(X)  # Add intercept
+
+# Define dependent variable (fund return)
+y = df["fund_return"]
+
+# Perform regression analysis
+model = sm.OLS(y, X).fit()
+print(model.summary())
