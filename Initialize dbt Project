@@ -1,0 +1,5 @@
+# Initialize a new dbt project
+dbt init icapital_analytics
+
+# Navigate into the project folder
+cd icapital_analytics
