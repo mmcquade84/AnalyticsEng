@@ -1,0 +1,11 @@
+WITH fund_returns AS (
+    SELECT 
+        investment_product, 
+        SUM(investment_amount) AS total_invested,
+        SUM(redemption_amount) AS total_redemptions
+    FROM {{ ref('stg_investor_activity') }}
+    GROUP BY investment_product
+)
+SELECT *, 
+       (total_redemptions / NULLIF(total_invested, 0)) AS redemption_rate
+FROM fund_returns;
