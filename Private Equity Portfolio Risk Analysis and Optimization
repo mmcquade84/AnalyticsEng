@@ -1,0 +1,40 @@
+SELECT 
+    investor_id, 
+    fund_name, 
+    investment_amount, 
+    investment_date, 
+    current_nav, 
+    annual_return, 
+    volatility
+FROM private_equity_investments
+WHERE investment_date >= '2015-01-01';
+
+import numpy as np
+import pandas as pd
+
+# Load fund return data
+returns = pd.read_csv("private_equity_returns.csv")
+
+# Compute historical Value at Risk (VaR) at 95% confidence level
+var_95 = np.percentile(returns["daily_return"], 5)
+print(f"95% Value at Risk: {var_95:.2f}%")
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Simulated portfolio returns for 1000 trials
+np.random.seed(42)
+simulated_returns = np.random.normal(0.08, 0.15, 1000)
+
+# Compute probability of loss
+loss_probability = np.mean(simulated_returns < 0)
+
+plt.hist(simulated_returns, bins=50, color='blue', alpha=0.6)
+plt.axvline(x=0, color='red', linestyle='dashed')
+plt.title("Private Equity Portfolio Simulation")
+plt.xlabel("Portfolio Return")
+plt.ylabel("Frequency")
+plt.show()
+
+print(f"Probability of Loss: {loss_probability:.2%}")
+
