@@ -1,0 +1,8 @@
+import numpy as np
+
+# Load fund returns
+returns = np.random.normal(0.02, 0.05, 1000)  # Simulated return data
+
+# Calculate 95% VaR
+var_95 = np.percentile(returns, 5)
+print(f"Value at Risk (95% Confidence): {var_95:.2f}")
