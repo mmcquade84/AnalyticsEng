@@ -1,0 +1,14 @@
+icapital_analytics:
+  outputs:
+    dev:
+      type: snowflake
+      account: icapital.snowflakecomputing.com
+      user: your_user
+      password: your_password
+      role: analytics_engineer
+      database: icapital_db
+      warehouse: analytics_wh
+      schema: dbt_dev
+      threads: 4
+      client_session_keep_alive: False
+  target: dev
