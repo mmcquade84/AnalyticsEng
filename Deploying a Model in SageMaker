@@ -1,0 +1,11 @@
+import boto3
+
+# Initialize SageMaker
+sagemaker = boto3.client('sagemaker')
+
+# Deploy trained model
+response = sagemaker.create_endpoint(
+    EndpointName="icapital-risk-model",
+    ModelName="risk-predictor",
+    InstanceType="ml.m5.large"
+)
