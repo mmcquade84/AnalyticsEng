@@ -1,0 +1,18 @@
+WITH performance AS (
+    SELECT
+        investment_product,
+        COUNT(DISTINCT investment_id) AS total_transactions,
+        SUM(investment_amount) AS total_volume,
+        SUM(redemption_amount) AS total_redemptions,
+        AVG(investment_amount) AS avg_transaction_size,
+        (SUM(redemption_amount) / NULLIF(SUM(investment_amount), 0)) AS redemption_rate
+    FROM {{ ref('stg_investor_activity') }}
+    GROUP BY investment_product
+)
+SELECT *,
+       CASE 
+           WHEN redemption_rate > 0.5 THEN 'Underperforming'
+           WHEN redemption_rate BETWEEN 0.2 AND 0.5 THEN 'Stable'
+           ELSE 'Growing'
+       END AS product_health
+FROM performance;
