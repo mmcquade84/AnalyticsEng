@@ -1,0 +1,20 @@
+WITH factor_exposures AS (
+    SELECT 
+        f.fund_id,
+        f.fund_name,
+        f.return_pct,
+        (f.market_return - r.risk_free_rate) AS market_factor,
+        f.small_stock_exposure AS size_factor,
+        f.illiquidity_exposure AS illiquidity_factor
+    FROM fund_performance f
+    JOIN risk_free_rates r ON f.date = r.date
+)
+SELECT 
+    fund_id,
+    fund_name,
+    return_pct,
+    market_factor,
+    size_factor,
+    illiquidity_factor,
+    (0.4 * market_factor + 0.3 * size_factor + 0.3 * illiquidity_factor) AS estimated_excess_return
+FROM factor_exposures;
