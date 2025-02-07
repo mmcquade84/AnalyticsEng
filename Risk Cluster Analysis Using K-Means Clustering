@@ -1,0 +1,15 @@
+import pandas as pd
+from sklearn.cluster import KMeans
+
+# Load investor dataset
+df = pd.read_csv("investor_data.csv")
+
+# Select risk-related features
+X = df[["investment_amount", "volatility", "redemption_rate"]]
+
+# Apply K-Means clustering
+kmeans = KMeans(n_clusters=3, random_state=42)
+df["risk_cluster"] = kmeans.fit_predict(X)
+
+# Display investor risk categories
+print(df[["investor_id", "risk_cluster"]].head())
