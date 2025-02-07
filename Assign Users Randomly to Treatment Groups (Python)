@@ -1,0 +1,16 @@
+import random
+import pandas as pd
+from sqlalchemy import create_engine
+
+# Connect to Snowflake
+engine = create_engine("snowflake://user:password@account/db/schema")
+
+# Sample user data
+users = pd.read_sql("SELECT user_id FROM users_table", engine)
+
+# Assign experiment groups
+users["experiment_name"] = "Investment_Fee_Structure_Test"
+users["variant"] = users["user_id"].apply(lambda x: "Treatment" if random.random() > 0.5 else "Control")
+
+# Upload to Snowflake
+users.to_sql("ab_test_tracking", con=engine, if_exists="append", index=False)
