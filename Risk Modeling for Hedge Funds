@@ -1,0 +1,9 @@
+SELECT 
+    investor_id,
+    investment_product,
+    investment_amount,
+    CASE 
+        WHEN investment_amount > 500000 THEN 'High Risk'
+        ELSE 'Low Risk'
+    END AS risk_category
+FROM investments;
