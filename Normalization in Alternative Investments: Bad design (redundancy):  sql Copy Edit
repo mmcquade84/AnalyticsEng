@@ -1,0 +1,6 @@
+CREATE TABLE investments (
+    investment_id INT PRIMARY KEY,
+    investor_name VARCHAR(255),
+    investment_amount DECIMAL(15,2),
+    investment_date TIMESTAMP
+);
