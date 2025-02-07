@@ -1,0 +1,16 @@
+CREATE TABLE investors (
+    investor_id INT PRIMARY KEY,
+    investor_name VARCHAR(255),
+    risk_tolerance VARCHAR(50),
+    net_worth DECIMAL(15,2),
+    registration_date TIMESTAMP
+);
+
+CREATE TABLE investments (
+    investment_id INT PRIMARY KEY,
+    investor_id INT,
+    fund_id INT,
+    investment_amount DECIMAL(15,2),
+    investment_date TIMESTAMP,
+    FOREIGN KEY (investor_id) REFERENCES investors(investor_id)
+);
