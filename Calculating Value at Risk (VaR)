@@ -1,0 +1,11 @@
+WITH daily_returns AS (
+    SELECT 
+        investment_id,
+        investment_date,
+        return_pct,
+        PERCENTILE_CONT(0.05) WITHIN GROUP (ORDER BY return_pct) OVER (PARTITION BY investment_id) AS var_95
+    FROM investment_returns
+)
+SELECT investment_id, investment_date, return_pct, var_95
+FROM daily_returns
+WHERE return_pct < var_95;
