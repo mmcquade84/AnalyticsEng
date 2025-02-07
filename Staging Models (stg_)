@@ -1,0 +1,22 @@
+WITH source AS (
+    SELECT
+        investor_id,
+        investment_id,
+        investment_product,
+        investment_date,
+        investment_amount,
+        redemption_amount,
+        risk_category,
+        created_at
+    FROM {{ source('icapital_raw', 'investor_activity') }}
+)
+SELECT
+    investor_id,
+    investment_id,
+    investment_product,
+    investment_date,
+    investment_amount,
+    COALESCE(redemption_amount, 0) AS redemption_amount,
+    risk_category,
+    created_at
+FROM source;
