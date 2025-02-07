@@ -1,0 +1,8 @@
+CREATE TABLE investments (
+    investor_id STRING,
+    investment_id STRING,
+    product_name STRING,
+    investment_amount FLOAT,
+    investment_date TIMESTAMP,
+    risk_score FLOAT
+);
