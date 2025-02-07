@@ -1,0 +1,13 @@
+version: 2
+models:
+  - name: stg_investor_activity
+    description: "Cleaned investor activity data"
+    columns:
+      - name: investor_id
+        tests:
+          - not_null
+          - unique
+      - name: investment_amount
+        tests:
+          - not_null
+          - positive_values
